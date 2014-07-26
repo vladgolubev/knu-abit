@@ -1,0 +1,12 @@
+.idea/
+doc/
+libs/*/src/
+META-INF/
+out/
+
+*.iml
+*-doc.jar
+*-javadoc.jar
+*-sources.jar
+.config
+thumbs.db

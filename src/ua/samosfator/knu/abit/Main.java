@@ -38,15 +38,17 @@ public class Main {
                     break;
                 }
             }
+            int i = 0;
             for (Element tr : table.select("tbody tr")) {
                 String name = tr.select("td").eq(1).text();
                 double score = Double.parseDouble(tr.select("td").eq(2).text());
                 boolean docs = !tr.select("td").eq(7).text().equals("—");
 
-                statement += "INSERT INTO " + tableName + " (name, score, docs) " + "VALUES (\"" +
+                statement += "INSERT OR REPLACE INTO " + tableName + " (name, score, docs) " + "VALUES (\"" +
                         name + "\" , " + score + " , \"" + docs + "\"); \n";
+                System.out.println(tableName + ": " + i++);
             }
-            System.out.println(statement);
+            i = 0;
             putToDatabase(statement, tableName);
         }
 
@@ -58,13 +60,12 @@ public class Main {
         c.setAutoCommit(false);
         Statement stmt = c.createStatement();
 
-        stmt.executeUpdate("CREATE TABLE " + tableName +
-                " ( name TEXT NOT NULL, score double NOT NULL, " +
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS " + tableName +
+                " ( name TEXT PRIMARY KEY, score double NOT NULL, " +
                 "docs boolean NOT NULL )");
 
         stmt.executeUpdate(statement);
 
-        System.out.println(tableName);
         stmt.close();
         c.commit();
         c.close();
