@@ -21,6 +21,10 @@ body {
 	background: #ececec;
 	font-family: Arial;
 }
+#date {
+	text-align: center;
+	color: #808080;
+}
 #list {
 	background: #fff;
 	padding: 20px 20px 20px 25px;
@@ -29,6 +33,7 @@ body {
 	width: 28%;
 	margin: 0 auto;
 	margin-top: 5%;
+	margin-bottom: 100px;
 }
 table {
 	margin: auto;

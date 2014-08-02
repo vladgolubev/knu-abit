@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class HTML {
@@ -20,10 +23,16 @@ public class HTML {
             html += "<p><a href=\"pages/" + faculty.getCode() + "/index.html\">" + faculty.getName() + "</a></p>";
         }
 
-        html += "</div></body>" + getHtmlAfterBody(-1);
+        html += "</div>" + getUpdateTimeHtml() + "</body>" + getHtmlAfterBody(-1);
 
         pw.println(html);
         pw.close();
+    }
+
+    private static String getUpdateTimeHtml() {
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
+        return "<p id=\"date\">Сторінку оновлено о " + ldt.format(dtf) + "</p>";
     }
 
     public static void createFacultyPages(Faculty faculty, List<Direction> directions) throws FileNotFoundException, UnsupportedEncodingException {
@@ -37,7 +46,7 @@ public class HTML {
         for (Direction direction : directions) {
             html += "<p><a href=\"" + direction.getCode() + "/index.html\">" + direction.getName() + "</a></p>";
         }
-        html += "</div></body>" + getHtmlAfterBody(2);
+        html += "</div>" + getUpdateTimeHtml() + "</body>" + getHtmlAfterBody(2);
 
         pw.println(html);
         pw.close();
