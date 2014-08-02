@@ -1,5 +1,6 @@
 .idea/
 doc/
+dump/
 libs/*/src/
 META-INF/
 out/
