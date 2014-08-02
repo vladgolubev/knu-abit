@@ -15,9 +15,18 @@ public class HTML {
             "<script src=\"js/jquery.js\"></script><script src=\"js/tablesorter.js\"></script></head>";
     public static final String AFTER_BODY = "<script src=\"js/script.js\"></script></html>";
 
-    public static void writeIndex() throws FileNotFoundException, UnsupportedEncodingException {
+    public static void writeIndex(List<Faculty> faculties) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter pw = new PrintWriter("www/index.html", "UTF-8");
-        
+        String html = HEAD + "<body><div id=\"faculties\">";
+
+        for (Faculty faculty : faculties) {
+            html += "<p><a href=\"" + faculty.getCode() + ".html\">" + faculty.getName() + "</a></p>";
+        }
+
+        html += "</div></body>" + AFTER_BODY;
+
+        pw.println(html);
+        pw.close();
     }
 
     public static void writeList(List<Entrant> list) throws FileNotFoundException, UnsupportedEncodingException {
