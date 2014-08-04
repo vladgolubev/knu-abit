@@ -4,6 +4,7 @@ dump/
 libs/*/src/
 META-INF/
 out/
+www/
 
 *.iml
 *-doc.jar
