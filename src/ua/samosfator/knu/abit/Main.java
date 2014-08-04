@@ -9,15 +9,15 @@ public class Main {
         List<Direction> directions;
         List<Entrant> entrants;
 
-        HTML.createIndex(faculties);
+        HTMLwriter.createIndex(faculties);
 
         for (Faculty faculty : faculties) {
             directions = Direction.getDirections(faculty);
-            HTML.createFacultyPages(faculty, directions);
+            HTMLwriter.createFacultyPages(faculty, directions);
 
             for (Direction direction : directions) {
                 entrants = Entrant.getEntrants(direction, 1);
-                HTML.writeEntrants(entrants);
+                HTMLwriter.writeEntrants(entrants);
             }
         }
     }
